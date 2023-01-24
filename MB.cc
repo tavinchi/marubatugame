@@ -2,6 +2,8 @@
 using namespace std;
 int main(){
     vector<vector<char>> MB(3,vector<char>(3,'-'));
+    char z;
+    bool flg=false;
     for(int i=0;i<9;i++){
         if(i%2==0){
             cout<<"〇のターン"<<endl;
@@ -21,82 +23,89 @@ int main(){
                 cout <<MB.at(j).at(k);
             }
             cout <<endl;
-            
         }
 
-    }
 
-    for(int i=0;i<3;i++){
-        for(int j=0;j<3;j++){
-            cout <<MB.at(i).at(j);
-        }
-        cout <<endl;
-    }
-    cout <<endl;
-
-    char z;
-    //横数え
-    int count=0;
-    for(int i=0;i<3;i++){
-        for(int j=0;j<1;j++){
-            if(MB[i][j]==MB[i][j+1] && MB[i][j] != '-'){
-                count++;
+        bool flg=false;
+        int count=0;
+        //横数え
+        if(flg==false){
+            for(int l=0;l<3;l++){
+                for(int m=0;m<1;m++){
+                    if(MB[l][m]==MB[l][m+1] && MB[l][m] != '-'){
+                        count++;
+                    }
+                    if(MB[l][m]==MB[l][m+2]){
+                        count++;
+                        z=MB[l][m];
+                    }
+                }
+                if(count==2){
+                    printf("%cの勝ちです！\n",z);
+                    i=8;
+                    flg=true;
+                }
+                count=0;
             }
-            if(MB[i][j]==MB[i][j+2]){
-                count++;
-                z=MB[i][j];
-            }
         }
-        if(count==2){
-            printf("%cが横に揃いました\n",z);
-        }
-        count=0;
-    }
 
-    //縦数え
-    for(int i=0;i<1;i++){
-        for(int j=0;j<3;j++){
-            if(MB[i][j]==MB[i+1][j] && MB[i][j] != '-'){
-                count++;
+        //縦数え
+        if(flg==false){
+            for(int l=0;l<1;l++){
+                for(int m=0;m<3;m++){
+                    if(MB[l][m]==MB[l+1][m] && MB[l][m] != '-'){
+                        count++;
+                    }
+                    if(MB[l][m]==MB[l+2][m]){
+                        count++;
+                        z=MB[l][m];
+                    }
+                    if(count==2){
+                        printf("%cの勝ちです！\n",z);
+                        i=8;
+                        flg=true;
+                    }
+                    count=0;   
+                }    
             }
-            if(MB[i][j]==MB[i+2][j]){
+        }
+
+        //右ななめ下数え
+        if(flg==false){
+            for(int l=0;l<1;l++){
+                for(int m=0;m<1;m++){
+                    if(MB[l][m]==MB[l+1][m+1] && MB[l][m] != '-'){
+                        count++;
+                    }
+                    if(MB[l][m]==MB[l+2][m+2]){
+                        count++;
+                        z=MB[l][m];
+                    }
+                }
+                if(count==2){
+                    printf("%cの勝ちです！\n",z);
+                    i=8;
+                    flg=true;
+                }
+                count=0;
+            }
+        }
+
+        
+        //左ななめ下数え
+        if(flg==false){
+            if(MB[2][0]==MB[1][1] && MB[2][0] != '-'){
                 count++;
-                z=MB[i][j];
+                if(MB[2][0]==MB[0][2]){
+                    count++;
+                    z=MB[2][0];
+                }
             }
             if(count==2){
-                printf("%cが縦に揃いました\n",z);
-            }
-            count=0;   
-        }    
-    }
-
-    //右ななめ下数え
-    for(int i=0;i<1;i++){
-        for(int j=0;j<1;j++){
-            if(MB[i][j]==MB[i+1][j+1] && MB[i][j] != '-'){
-                count++;
-            }
-            if(MB[i][j]==MB[i+2][j+2]){
-                count++;
-                z=MB[i][j];
+                printf("%cの勝ちです！\n",z);
+                i=8;
+                flg=true;
             }
         }
-        if(count==2){
-            printf("%cが斜めに揃いました\n",z);
-        }
-        count=0;
-    }
-
-
-    //左ななめ下数え
-    if(MB[2][0]==MB[1][1] && MB[2][0] != '-'){
-        count++;
-        if(MB[2][0]==MB[0][2]){
-            count++;
-            z=MB[2][0];
-        }
-    }
-    if(count==2){
-       printf("%cがななめに揃いました\n",z); 
     }
 }
