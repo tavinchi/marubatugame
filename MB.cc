@@ -1,5 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
+#define width 3
+#define height 3
 int main(){
     vector<vector<char>> MB(3,vector<char>(3,'-'));
     char z;
@@ -44,6 +46,7 @@ int main(){
                     printf("%cの勝ちです！\n",z);
                     i=8;
                     flg=true;
+                    break;
                 }
                 count=0;
             }
@@ -64,6 +67,7 @@ int main(){
                         printf("%cの勝ちです！\n",z);
                         i=8;
                         flg=true;
+                        break;
                     }
                     count=0;   
                 }    
@@ -86,6 +90,7 @@ int main(){
                     printf("%cの勝ちです！\n",z);
                     i=8;
                     flg=true;
+                    break;
                 }
                 count=0;
             }
@@ -106,6 +111,9 @@ int main(){
                 i=8;
                 flg=true;
             }
+        }
+        if(i==8&&flg!=true){
+            printf("引き分けです！\n");
         }
     }
 }
